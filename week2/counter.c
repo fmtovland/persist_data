@@ -1,9 +1,11 @@
 #include <stdio.h>
+#define BRICKS 150
 
 int main()
 {
 	FILE *fp;
-	int number_of_char=0;
+	char ch;
+	int number=0;		//will count the number of characters in a file
 
 //	printf("opening file \n");
 	fp=fopen("num_let.txt","r");
@@ -13,12 +15,17 @@ int main()
 		printf("\n\n ERROR: File is not found for opening \n\n");	//error checking
 	}
 
-	while(fp+number_of_char != NULL)
+//	printf("File opened \n");
+
+	while((ch = fgetc( fp )) != EOF)
 	{
-		number_of_char++;
-		printf("%c",(fp+number_of_char));
+	        number++;
 	}
 
-	printf("File contains %d characters \n",number_of_char);
+	printf("There are %d characters in the file \n",number);
+
+	fclose(fp);			//lose access to the file
+
+	return 0;
 
 }//end main
