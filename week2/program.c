@@ -20,9 +20,9 @@ int main()
 	//while it is sucessfull reading
 	{
 		printf("%s",line);
-		fclose(fp);		//lose access to the file
-
 	}//end while
+
+	fclose(fp);			//lose access to the file
 
 	return 0;
 
