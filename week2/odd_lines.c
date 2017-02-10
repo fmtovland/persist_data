@@ -26,8 +26,8 @@ int main()
 	gets(filename);		//input filename
 
 	file=fopen(filename,"r");		//open input file
-	even=fopen("even_lines.txt","rw+");	//open output file for even lines
-	odd=fopen("odd_lines.txt","rw+");	//open output file for odd lines
+	even=fopen("even_lines.txt","a+");	//open output file for even lines
+	odd=fopen("odd_lines.txt","a+");	//open output file for odd lines
 
 	if(file == NULL)
 	{
