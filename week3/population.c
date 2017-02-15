@@ -23,6 +23,7 @@ int highest(int*,int);		//function to find highest number in an array
 
 int main()
 {
+	register int i;			//for loops
 	FILE *population;		//pointer to population data
 	long int residents[NOPOPS];	//array of popultion data (number of residents only)
 
@@ -34,7 +35,11 @@ int main()
 
 	}//end if
 
-	fscanf(population,"%*s %*s %ld",residents);
+	for(i=0; i<NOPOPS; i++)
+	{
+		fscanf(population,"%*s %*s %ld",residents+i);
+
+	}//end for
 
 	printf("%ld",residents[6]);
 
