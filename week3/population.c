@@ -16,15 +16,15 @@ Compiler: 4.9.4
 */
 
 #include <stdio.h>
-#define NOPOPS 15;	//the maximum number of populations there can be (with some breathing room)
+#define NOPOPS 15	//the maximum number of populations there can be (with some breathing room)
 
 //prototypes
 int highest(int*,int);		//function to find highest number in an array
 
 int main()
 {
-	FILE *population;	//pointer to population data
-	int residents;		//array of popultion data (number of residents only)
+	FILE *population;		//pointer to population data
+	long int residents[NOPOPS];	//array of popultion data (number of residents only)
 
 	population=fopen("populations.txt","r");
 
@@ -33,5 +33,9 @@ int main()
 		printf("Input Output Error \n");
 
 	}//end if
+
+	fscanf(population,"%*s %*s %ld",residents);
+
+	printf("%ld",residents[6]);
 
 }//end main
