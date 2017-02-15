@@ -16,11 +16,24 @@ Compiler: GCC 4.9.4
 
 int main()
 {
-	char file1[NUMNO],file2[NUMNO];		//strings to hold filenames
+	char filename1[NUMNO],filename2[NUMNO];		//strings to hold filenames
+	FILE *file1,*file2;				//pointers to hold the files
+	FILE *output;					//pointer to output file
 
 	printf("Enter a filename\n");		//ask user to input filenames
-	gets(file1);
+	gets(filename1);
 	printf("Enter another filename\n");
-	gets(file2);
+	gets(filename2);
+
+	file1=fopen(filename1,"r");		//open input and output files for writing
+	file2=fopen(filename2,"r");
+	output=fopen("merged.txt","w+");
+
+	if(file1 == NULL || file2 == NULL || output == NULL)
+	{
+		printf("Input Output Error! \n");
+
+	}//end if
+
 
 }//end main
