@@ -19,13 +19,16 @@ Compiler: 4.9.4
 #define NOPOPS 15	//the maximum number of populations there can be (with some breathing room)
 
 //prototypes
-int highest(int*,int);		//function to find highest number in an array
+long int sum(long int*);		//return the sum off all data in the array
+int biggest(long int*);			//function to find highest number in an array
 
 int main()
 {
 	register int i;			//for loops
 	FILE *population;		//pointer to population data
 	long int residents[NOPOPS];	//array of popultion data (number of residents only)
+	long int total;			//the total population of all the cities combined
+	int highest;			//will hold the line number of the city with the largest population
 
 	population=fopen("populations.txt","r");
 
@@ -35,12 +38,30 @@ int main()
 
 	}//end if
 
-	for(i=0; i<NOPOPS; i++)
+	for(i=0; i<NOPOPS; i++)		//put population data into residents
 	{
 		fscanf(population,"%*s %*s %ld",residents+i);
 
 	}//end for
 
-	printf("%ld",residents[6]);
+	total=sum(residents);
+//	highest=biggest(residents);
+
+	printf("The total population of all these cities is %ld \n",total);
 
 }//end main
+
+long int sum(long int *populations)
+{
+	register int i;
+	long int total=0;		//the value to be returned
+
+	for(i=0; i<NOPOPS; i++)
+	{
+		total = total + *(populations+i);
+
+	}//end for
+
+	return total;
+
+}//end total
