@@ -45,9 +45,10 @@ int main()
 	}//end for
 
 	total=sum(residents);
-//	highest=biggest(residents);
+	highest=biggest(residents);
 
 	printf("The total population of all these cities is %ld \n",total);
+	printf("Town %d had the highest population \n",highest);
 
 }//end main
 
@@ -65,3 +66,24 @@ long int sum(long int *populations)
 	return total;
 
 }//end total
+
+int biggest(long int *populations)
+{
+	register int i;
+	int highscore=0;	//the town with the largest population sofar
+	int largest;		//town with largest population
+
+	for(i=0; i<NOPOPS; i++)
+	{
+		if( *(populations+i) > highscore)
+		{
+			largest=i;
+			highscore= *(populations+i);
+
+		}//end if
+
+	}//end for
+
+	return largest;
+
+}//end biggest
