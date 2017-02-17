@@ -29,6 +29,8 @@ int main()
 	long int residents[NOPOPS];	//array of popultion data (number of residents only)
 	long int total;			//the total population of all the cities combined
 	int highest;			//will hold the line number of the city with the largest population
+	char bigtown[21];		//string to hold largest city
+	int bigtownpop;			//population of largest city
 
 	population=fopen("populations.txt","r");
 
@@ -41,14 +43,35 @@ int main()
 	for(i=0; i<NOPOPS; i++)		//put population data into residents
 	{
 		fscanf(population,"%*s %*s %ld",residents+i);
+//		printf("%d\n",*(residents+i));
 
 	}//end for
+
+	fclose(population);
 
 	total=sum(residents);
 	highest=biggest(residents);
 
 	printf("The total population of all these cities is %ld \n",total);
-	printf("Town %d had the highest population \n",highest);
+
+	population=fopen("populations.txt","r");
+
+	if(population == NULL)
+	{
+		printf("Input Output Error \n");
+
+	}//end if
+
+
+	for(i=0; i<highest; i++)
+	{
+		fscanf(population,"%*s %20s %d",bigtown,&bigtownpop);
+
+	}//end for
+
+	fclose(population);
+
+	printf("%s has the highest population at %d people \n",bigtown,bigtownpop);
 
 }//end main
 
@@ -77,7 +100,7 @@ int biggest(long int *populations)
 	{
 		if( *(populations+i) > highscore)
 		{
-			largest=i;
+			largest=i+1;
 			highscore= *(populations+i);
 
 		}//end if
