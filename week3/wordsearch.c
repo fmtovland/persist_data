@@ -20,11 +20,11 @@ Compiler: GCC 5.4.0
 
 #include <stdio.h>
 #define FILELENGTH 40	//maximum number of characters in the filename (scanf at //let user choose file to open)
-#define WORDSIZE 9	//number of letters per word in wordspliced
-#define WORDNO 50	//maximum number of words per line in wordspliced
+#define WORDSIZE 13	//number of letters per word
+#define LINESIZE 20	//max words per line
 
 //prototypes
-void splice(char*,char[WORDSIZE][WORDNO]);
+//void splice(char*,char[WORDSIZE][WORDNO]);
 
 int main()
 {
@@ -32,11 +32,10 @@ int main()
 	FILE *subject;		//file to search for a word
 
 	//variables
-	register int i;				//for loops
+	register int i,j;			//for loops
 	char hunting_ground[FILELENGTH];	//name of the file that can be searched
-	char user_input;			//word to search the file for
-	char line[WORDSIZE*WORDNO];		//hold a line of text
-	char spliced[WORDSIZE][WORDNO];		//hold a line of text divided into individual words
+	char user_input[WORDSIZE];		//word to search the file for
+	char line[WORDSIZE][LINESIZE];		//hold a line of text
 	int line_number=0;			//line on which searched word is found
 	int word_number=0;			//word of line on which searched word is found
 
@@ -55,23 +54,23 @@ int main()
 	printf("What word are you looking for?\n");
 	scanf("%s",user_input);
 
-	//search through the file for the word
-	while(fgets(line,WORDSIZE*WORDNO,subject) != NULL)
+	//search through the file for the word and print line if found
+	for(i=0; i<WORDSIZE; i++)
 	{
-		splice(line,spliced);
-
-		for(i=0; i<WORDNO; i++)
+		fscanf(subject,"%12s",line);
+		for(j=0; j<LINESIZE; j++)
 		{
-			if(strcmp(spliced+(WORDSIZE*i),user_input) == 0)
+			if(strcmp(line[j],user_input)==0)
 			{
-				printf("%s\n",spliced+(WORDSIZE*i));
+				printf("%s \n",line);
 				return 0;
 
 			}//end if
 
 		}//end for
 
-	}//end while
+	}//end for
+
 
 	//if word is not found print this error
 	printf("ERROR: word not found\n");
@@ -80,6 +79,7 @@ int main()
 
 }//end main
 
+/*
 void splice(char line[WORDSIZE*WORDNO], char spliced[WORDSIZE][WORDNO])
 {
 	//variables
@@ -97,3 +97,4 @@ void splice(char line[WORDSIZE*WORDNO], char spliced[WORDSIZE][WORDNO])
 	}//end for
 
 }//end splice
+*/
