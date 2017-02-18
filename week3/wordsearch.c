@@ -57,13 +57,13 @@ int main()
 	//search through the file for the word and print line if found
 	for(i=0; i<WORDSIZE; i++)
 	{
-		fscanf(subject,"%12s",line);
+		fscanf(subject,"%12s",line[i]);
 		for(j=0; j<LINESIZE; j++)
 		{
 			if(strcmp(line[j],user_input)==0)
 			{
-				printf("%s \n",line);
-				return 0;
+				line_number=i;
+				printf("%d \n",line_number);
 
 			}//end if
 
