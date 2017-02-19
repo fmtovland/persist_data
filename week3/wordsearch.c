@@ -20,11 +20,8 @@ Compiler: GCC 5.4.0
 
 #include <stdio.h>
 #define FILELENGTH 40	//maximum number of characters in the filename (scanf at //let user choose file to open)
-#define WORDSIZE 13	//number of letters per word
-#define LINESIZE 20	//max words per line
-
-//prototypes
-//void splice(char*,char[WORDSIZE][WORDNO]);
+#define WORDSIZE 15	//number of characters in the word to search for (scanf at //ask the user what word to search for)
+#define LINESIZE 400	//maximum characters per line
 
 int main()
 {
@@ -35,7 +32,7 @@ int main()
 	register int i,j;			//for loops
 	char hunting_ground[FILELENGTH];	//name of the file that can be searched
 	char user_input[WORDSIZE];		//word to search the file for
-	char line[WORDSIZE][LINESIZE];		//hold a line of text
+	char line[LINESIZE];		//hold a line of text
 	int line_number=0;			//line on which searched word is found
 	int word_number=0;			//word of line on which searched word is found
 
@@ -52,25 +49,27 @@ int main()
 
 	//ask the user what word to search for
 	printf("What word are you looking for?\n");
-	scanf("%s",user_input);
+	scanf("%14s",user_input);
 
 	//search through the file for the word and print line if found
-	for(i=0; i<WORDSIZE; i++)
+	j=0;
+	while(fgets(line,LINESIZE-1,subject) != NULL)
 	{
-		fscanf(subject,"%12s",line[i]);
-		for(j=0; j<LINESIZE; j++)
+		i=0;
+		while(line[i] != ' ')
 		{
-			if(strcmp(line[j],user_input)==0)
+			if(line[i+j] == user_input[i])
 			{
-				line_number=i;
-				printf("%d \n",line_number);
+				printf("%c",line[i]);
 
 			}//end if
 
-		}//end for
+			i++;
 
-	}//end for
+		}//end while
+		j=i;
 
+	}//end while
 
 	//if word is not found print this error
 	printf("ERROR: word not found\n");
@@ -78,23 +77,3 @@ int main()
 	return 1;
 
 }//end main
-
-/*
-void splice(char line[WORDSIZE*WORDNO], char spliced[WORDSIZE][WORDNO])
-{
-	//variables
-	register int i,j;
-
-	for(i=0; i<WORDNO; i++)
-	{
-		j=0;
-		while(*(line+(i*WORDSIZE)+j) != ' ' && j<WORDSIZE)	//until a space is encountered or 9 characters have been entered
-		{
-			spliced[i][j]=*(line+(i*WORDSIZE)+j);
-
-		}//end while
-
-	}//end for
-
-}//end splice
-*/
