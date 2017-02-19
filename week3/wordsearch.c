@@ -21,7 +21,7 @@ Compiler: GCC 5.4.0
 #include <stdio.h>
 #define FILELENGTH 40	//maximum number of characters in the filename (scanf at //let user choose file to open)
 #define WORDSIZE 15	//number of characters in the word to search for (scanf at //ask the user what word to search for)
-#define LINESIZE 400	//maximum characters per line
+#define LINESIZE 100	//maximum characters per line
 
 int main()
 {
@@ -54,13 +54,13 @@ int main()
 
 	//search through the file for the word and print line if found
 	line_number=0;
-//	while(fgets(line,LINESIZE-1,subject) != NULL)
-	while(fscanf(subject,"%[^\n]s",line) != EOF)
+	while(fgets(line,LINESIZE-1,subject) != NULL)
+//	while(fscanf(subject,"%[^\n]s",line) != EOF)
 	{
 		line_number++;
 		word_number=0;
 		i=0;
-		while(line[i] != '\0')
+		while(i<LINESIZE)
 		{
 			j=0;
 			word_number++;
