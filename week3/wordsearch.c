@@ -32,7 +32,8 @@ int main()
 	register int i,j;			//for loops
 	char hunting_ground[FILELENGTH];	//name of the file that can be searched
 	char user_input[WORDSIZE];		//word to search the file for
-	char line[LINESIZE];		//hold a line of text
+	char line[LINESIZE];			//hold a line of text
+	char word[WORDSIZE];			//hold a word to compare to user_input
 	int line_number=0;			//line on which searched word is found
 	int word_number=0;			//word of line on which searched word is found
 
@@ -52,22 +53,35 @@ int main()
 	scanf("%14s",user_input);
 
 	//search through the file for the word and print line if found
-	j=0;
-	while(fgets(line,LINESIZE-1,subject) != NULL)
+	line_number=0;
+//	while(fgets(line,LINESIZE-1,subject) != NULL)
+	while(fscanf(subject,"%[^\n]s",line) != EOF)
 	{
+		line_number++;
+		word_number=0;
 		i=0;
-		while(line[i] != ' ')
+		while(line[i] != '\0')
 		{
-			if(line[i+j] == user_input[i])
+			j=0;
+			word_number++;
+			while(line[i] != ' ' && j<WORDSIZE)
 			{
-				printf("%c",line[i]);
+				word[j]=line[i];
+				i++;
+				j++;
 
-			}//end if
+			}//end while
 
 			i++;
 
+			if(strcmp(word,user_input) == 0)
+			{
+				printf("Word found at line %d word %d \n",line_number,word_number);
+				return 0;
+
+			}//end if
+
 		}//end while
-		j=i;
 
 	}//end while
 
