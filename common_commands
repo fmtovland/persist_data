@@ -1,0 +1,15 @@
+fgetc(f)			Read a char from file f
+
+fputc(f)			Write a char to file f
+
+fgets(string,size,f)		Read a string from file f.
+				It reads a string of a specified
+				size
+
+fputs(string,f)			Write a string to a file f
+
+fprintf	(“Hi %s, you are	Write the content to the file f
+%i”,s,a)
+
+fscanf(f,”%s %s			Read a formatted line from file f
+%i”,a,b,&c)
