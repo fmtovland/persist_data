@@ -21,6 +21,7 @@ Compiler: 4.9.4
 //prototypes
 long int sum(long int*);		//return the sum off all data in the array
 int biggest(long int*);			//function to find highest number in an array
+void ireland();				//create file with list of cities in ireland and their populations
 
 int main()
 {
@@ -73,6 +74,8 @@ int main()
 
 	printf("%s has the highest population at %d people \n",bigtown,bigtownpop);
 
+	ireland();
+
 }//end main
 
 long int sum(long int *populations)
@@ -110,3 +113,27 @@ int biggest(long int *populations)
 	return largest;
 
 }//end biggest
+
+void ireland()
+{
+	FILE *populations,*irelandpop;
+	char location[10];		//hold a country
+	char line[10];			//hold a city and population
+	char line2[10];
+	populations=fopen("populations.txt","r");
+	irelandpop=fopen("ireland.txt","w+");
+
+	while(fscanf(populations,"%10s %20s %10s",location,line,line2) != EOF)
+	{
+
+		if(strcmp(location,"ireland")==0)
+		{
+			fprintf(irelandpop,"%s %s \n",line,line2);
+
+		}//end if
+
+	}//end while
+
+	fclose(irelandpop);
+
+}//end ireland()
