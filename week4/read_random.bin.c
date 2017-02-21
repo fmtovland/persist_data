@@ -4,7 +4,7 @@ int main()
 {
 	int i,r;
 	FILE *random_bin;
-	random_bin=fopen("random.bin","r");
+	random_bin=fopen("num1000.bin","r");
 
 	for(i=0; i<1000; i++)
 	{

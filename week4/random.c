@@ -6,7 +6,7 @@
 main()
 {
 	FILE *random_bin;
-	random_bin=fopen("random.bin","w+");
+	random_bin=fopen("num1000.bin","w+");
 	int r, i;
 
 	srand(time(NULL));
