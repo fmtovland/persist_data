@@ -13,3 +13,6 @@ fprintf	(“Hi %s, you are	Write the content to the file f
 
 fscanf(f,”%s %s			Read a formatted line from file f
 %i”,a,b,&c)
+
+fwrite(variable of any type,1,sizeof(variable type),filepointer)
+same santax for fread
