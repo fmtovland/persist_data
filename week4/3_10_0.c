@@ -16,10 +16,10 @@ int main()
 
 	//write to third number
 	fseek(num1000, 2*sizeof(int), SEEK_SET);
-	fwrite(&num,1,sizeof(int),num1000);
+	fwrite(&num,sizeof(int),1,num1000);
 
 	//write to tenth number
 	fseek(num1000, 9*sizeof(int), SEEK_SET);
-	fwrite(&num,1,sizeof(int),num1000);
+	fwrite(&num,sizeof(int),1,num1000);
 
 }//end main
