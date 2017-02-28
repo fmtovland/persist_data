@@ -10,14 +10,16 @@ int main()
 	int num=0;
 	//open file for reading and writing
 	FILE *num1000;
-	num1000=fopen("num1000.bin","a");
+	num1000=fopen("num1000.bin","r+");
+	if(num1000==NULL)
+	{printf("ERROR\n");}
 
 	//write to third number
-	fseek(num1000, 3, SEEK_SET);
-	fwrite(&num,sizeof(int),1,num1000);
+	fseek(num1000, 2*sizeof(int), SEEK_SET);
+	fwrite(&num,1,sizeof(int),num1000);
 
 	//write to tenth number
-	fseek(num1000, 10, SEEK_SET);
-	fwrite(&num,sizeof(int),1,num1000);
+	fseek(num1000, 9*sizeof(int), SEEK_SET);
+	fwrite(&num,1,sizeof(int),num1000);
 
 }//end main
