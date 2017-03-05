@@ -15,7 +15,7 @@ struct postal_address
 
 struct credit_union_account
 {
-	int pps;		//Personal Public Service number
+	char pps[10];		//Personal Public Service number
 	char first_name[15];	//firstname
 	char surname[30];	//surname
 	char contact_number[10];//phone number

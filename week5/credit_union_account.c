@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include "credit_union_account.h"
 
 int main()
 {
+	FILE *jane;
+	jane=fopen("jane.ant","w+");
 	struct credit_union_account dit;
 
 	strcpy(dit.first_name,"Jane");
@@ -14,5 +17,7 @@ int main()
 	dit.dob.day=1;
 	strcpy(dit.dob.month,"jan");
 	dit.dob.year=1999;
+	strcpy(dit.pps,"123456X");
 
+	fwrite(&dit,1,sizeof(dit),jane);
 }
