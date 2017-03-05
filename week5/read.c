@@ -4,7 +4,13 @@
 int main()
 {
 	FILE *jane;
-	fopen("jane.ant","r");
+	jane=fopen("jane.ant","r");
+
+	if(jane==NULL)
+	{
+		printf("io error\n");
+		return 1;
+	}
 
 	struct credit_union_account dit;
 	fread(&dit,1,sizeof(dit),jane);
