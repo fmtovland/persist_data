@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 	//load file into ram
 	file_in_ram=malloc(filesize);
 	fread(file_in_ram,1,filesize,raw_file);
-	printf("File is %d\n",filesize);
 
 	//perform encryption algorithm on file
 //	scramble(file_in_ram);	//or whatever eion calls it
