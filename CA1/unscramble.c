@@ -5,10 +5,12 @@
 
 int main(int argc, char *argv[])
 {
-	FILE *raw_file,*enc_file;
+	FILE *raw_file,*dec_file;
 	char filename[51];
+	char *wissbl;	//pointer to sbl in the filename
 	int *file_in_ram;
 	int filesize;	//the size of the file
+	int i;
 
 	//set file to scrambele to first argument
 	if(argv[1] != NULL)
@@ -17,7 +19,7 @@ int main(int argc, char *argv[])
 	//ask user to enter filename if none provided
 	else
 	{
-		printf("Enter name of file to encrypt\n");
+		printf("Enter name of file to decrypt\n");
 		scanf("%50s",filename);
 	}
 
@@ -25,8 +27,16 @@ int main(int argc, char *argv[])
 	raw_file=fopen(filename,"r");
 
 	//open output file
-	strcat(filename,".sbl");
-	enc_file=fopen(filename,"w+");
+	wissbl=strstr(filename, ".sbl");
+	if(wissbl==NULL)
+	{
+		printf("Not a scrambled file\n");
+		return 1;	//program exits
+	}
+
+	for(i=0; i<4; i++);
+	*(filename+i-1)='\0';
+	dec_file=fopen(filename,"w+");
 
 	//find filesize
 	fseek(raw_file, 0, SEEK_END);
@@ -38,13 +48,13 @@ int main(int argc, char *argv[])
 	fread(file_in_ram,1,filesize,raw_file);
 
 	//perform encryption algorithm on file
-//	scramble(file_in_ram);	//or whatever eion calls it
+//	unscramble(file_in_ram);	//or whatever eion calls it
 
 	//save encrypted file to disk
-	fwrite(file_in_ram,1,filesize,enc_file);
+	fwrite(file_in_ram,1,filesize,dec_file);
 
 	//free ram taken by file and close files
 	fclose(raw_file);
-	fclose(enc_file);
+	fclose(dec_file);
 	free(file_in_ram);
 }
