@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 	FILE *raw_file,*enc_file;
 	char filename[51];
 	int *file_in_ram;
+	int filesize;	//the size of the file
 
 	//set file to scrambele to first argument
 	if(argv[1] != NULL)
@@ -26,13 +27,18 @@ int main(int argc, char *argv[])
 	strcat(filename,".sbl");
 	enc_file=fopen(filename,"w+");
 
+	//find filesize
+	fseek(raw_file, 0, SEEK_END);
+	filesize=ftell(raw_file);
+	rewind(raw_file);
+
 	//load file into ram
-	file_in_ram=malloc(sizeof(*raw_file));
-	fread(file_in_ram,1,sizeof(*raw_file),raw_file);
-	printf("File is %lud\n",sizeof(*raw_file));
+	file_in_ram=malloc(filesize);
+	fread(file_in_ram,1,filesize,raw_file);
+	printf("File is %d\n",filesize);
 
 	//save encrypted file to disk
-	fwrite(file_in_ram,1,sizeof(*raw_file),enc_file);
+	fwrite(file_in_ram,1,filesize,enc_file);
 
 	//free ram taken by file and close files
 	fclose(raw_file);
