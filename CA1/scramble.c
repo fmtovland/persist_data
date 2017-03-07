@@ -19,12 +19,23 @@ int main(int argc, char *argv[])
 		scanf("%50s",filename);
 	}
 
+	//open file
 	raw_file=fopen(filename,"r");
 
+	//open output file
 	strcat(filename,".sbl");
-
 	enc_file=fopen(filename,"w+");
-	file_in_ram=malloc(sizeof(raw_file));
 
+	//load file into ram
+	file_in_ram=malloc(sizeof(*raw_file));
+	fread(file_in_ram,1,sizeof(*raw_file),raw_file);
+	printf("File is %lud\n",sizeof(*raw_file));
+
+	//save encrypted file to disk
+	fwrite(file_in_ram,1,sizeof(*raw_file),enc_file);
+
+	//free ram taken by file and close files
+	fclose(raw_file);
+	fclose(enc_file);
 	free(file_in_ram);
 }
