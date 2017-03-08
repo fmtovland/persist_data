@@ -21,7 +21,7 @@ int main()
 	(*dit).dob.year=1999;
 	strcpy((*dit).pps,"123456X");
 
-	fwrite(&dit,1,sizeof(struct credit_union_account),jane);
+	fwrite(dit,1,sizeof(struct credit_union_account),jane);
 
 	free(dit);
 }
