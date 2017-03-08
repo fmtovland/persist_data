@@ -23,10 +23,20 @@ int main(int argc, char *argv[])
 
 	//open file
 	raw_file=fopen(filename,"r");
+	if(raw_file==NULL)
+	{
+		printf("Error opening input file\n");
+		return 1;
+	}
 
 	//open output file
 	strcat(filename,".sbl");
 	enc_file=fopen(filename,"w+");
+	if(enc_file==NULL)
+	{
+		printf("Error opening output file\n");
+		return 2;
+	}
 
 	//find filesize
 	fseek(raw_file, 0, SEEK_END);

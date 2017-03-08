@@ -23,20 +23,32 @@ int main(int argc, char *argv[])
 		scanf("%50s",filename);
 	}
 
-	//open file
+	//open input file
 	raw_file=fopen(filename,"r");
+	if(raw_file==NULL)
+	{
+		printf("Error opening input file\n");
+		return 1;
+	}
 
 	//open output file
 	wissbl=strstr(filename, ".sbl");
 	if(wissbl==NULL)
 	{
 		printf("Not a scrambled file\n");
-		return 1;	//program exits
+		return 2;	//program exits
 	}
 
 	for(i=0; i<4; i++);
 	*(filename+i-1)='\0';
 	dec_file=fopen(filename,"w+");
+
+	//verify opening output file was sucessful
+	if(dec_file==NULL)
+	{
+		printf("Error opening output file\n");
+		return 3;
+	}
 
 	//find filesize
 	fseek(raw_file, 0, SEEK_END);
