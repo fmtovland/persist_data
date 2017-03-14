@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "eoin.h"
+#include "eoin.h"
 
 int main(int argc, char *argv[])
 {
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 	fread(file_in_ram,1,filesize,raw_file);
 
 	//perform encryption algorithm on file
-//	scramble(file_in_ram);	//or whatever eion calls it
+	scramble(file_in_ram,size);
 
 	//save encrypted file to disk
 	fwrite(file_in_ram,1,filesize,enc_file);
