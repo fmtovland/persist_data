@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 	FILE *raw_file,*dec_file;
 	char filename[51];
 	char *wissbl;	//pointer to sbl in the filename
-	int *file_in_ram;
+	char *file_in_ram;
 	int filesize;	//the size of the file
 	int i;
 

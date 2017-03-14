@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 	FILE *raw_file,*enc_file;
 	char filename[51];
-	int *file_in_ram;
+	char *file_in_ram;
 	int filesize;	//the size of the file
 
 	//set file to scrambele to first argument
