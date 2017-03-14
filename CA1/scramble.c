@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 	fread(file_in_ram,1,filesize,raw_file);
 
 	//perform encryption algorithm on file
-	scramble(file_in_ram,size);
+	scramble(file_in_ram,filesize);
 
 	//save encrypted file to disk
 	fwrite(file_in_ram,1,filesize,enc_file);
