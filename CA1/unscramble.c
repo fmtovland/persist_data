@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	}
 
 	for(i=0; i<4; i++);
-	*(filename+i-1)='\0';
+	*(wissbl+i-4)='\0';
 	dec_file=fopen(filename,"w+");
 
 	//verify opening output file was sucessful
