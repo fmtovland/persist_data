@@ -1,3 +1,5 @@
+#include <string.h>
+
 struct contact
 {
 	char name[15];			//firstname and surname
@@ -8,32 +10,33 @@ struct contact
 
 };
 
-/*
-const struct contact sample[5]	//a sample contact with 5 contacts
+
+void write_sample(struct contact *sample)	//a sample contact with 5 contacts
+{
 //1
-	sample[0].name="John Smith";
-	sample[0].phone=01234567;
-	sample[0].email="john.smith@jomail.com";
-	sample[0].date=010199000015;
+	strcpy((*(sample+0)).name,"John Smith");
+	(*(sample+0)).phone=1234567;
+	strcpy((*(sample+0)).email,"john.smith@jomail.com");
+	(*(sample+0)).date=10199000015;
 //2
-	sample[1].name="John Doe";
-	sample[1].phone=01234568;
-	sample[1].email="john.doe@jomail.com";
-	sample[1].date=010198120007;
+	strcpy((*(sample+1)).name,"John Doe");
+	(*(sample+1)).phone=1234568;
+	strcpy((*(sample+1)).email,"john.doe@jomail.com");
+	(*(sample+1)).date=10198120007;
 //3
-	sample[2].name="Jane Smith";
-	sample[2].phone=01234569;
-	sample[2].email="jane.smith@jomail.com";
-	sample[2].date=220312134212;
+	strcpy((*(sample+2)).name,"Jane Smith");
+	(*(sample+2)).phone=1234569;
+	strcpy((*(sample+2)).email,"jane.smith@jomail.com");
+	(*(sample+2)).date=220312134212;
 //4
-	sample[3].name="Jane Doe";
-	sample[3].phone=01234570;
-	sample[3].email="jane.doe@jomail.com";
-	sample[3].date=121212121212;
+	strcpy((*(sample+3)).name,"Jane Doe");
+	(*(sample+3)).phone=1234570;
+	strcpy((*(sample+3)).email,"jane.doe@jomail.com");
+	(*(sample+3)).date=121212121212;
 
 //5
-	sample[4].name="Eugine Crabs"
-	sample[4].phone=99124322;
-	sample[4].email="orders@thecrustycrab.com"
-	sample[4].date=170799160222;
-*/
+	strcpy((*(sample+4)).name,"Eugine Crabs");
+	(*(sample+4)).phone=99124322;
+	strcpy((*(sample+4)).email,"orders@thecrustycrab.com");
+	(*(sample+4)).date=170799160222;
+}
