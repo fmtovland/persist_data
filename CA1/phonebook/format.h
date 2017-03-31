@@ -1,13 +1,14 @@
 #include <string.h>
+#include <time.h>
+#define NAMLEN 15
+#define MAILLEN 40
 
 struct contact
 {
-	char name[15];			//firstname and surname
+	char name[NAMLEN];		//firstname and surname
 	unsigned long int phone;	//phone number: always print to 8 digits
-	char email[40];			//email address
-	unsigned long int date;		//int the form "DDMMYYhhmmss" with no seperators
-					//DD is day, MM month (01 january, 02 february etc.) YY is year (99 would be 1999, 05 would be 2005), hh would be an hour between 0 and 23, mm and ss are minutes and seconds, each between 0 and 59
-
+	char email[MAILLEN];		//email address
+	time_t date;			//see http://stackoverflow.com/questions/2242963/get-the-current-time-in-seconds
 };
 
 
@@ -17,26 +18,26 @@ void write_sample(struct contact *sample)	//a sample contact with 5 contacts
 	strcpy((*(sample+0)).name,"John Smith");
 	(*(sample+0)).phone=1234567;
 	strcpy((*(sample+0)).email,"john.smith@jomail.com");
-	(*(sample+0)).date=10199000015;
+	(*(sample+0)).date=time(0);
 //2
 	strcpy((*(sample+1)).name,"John Doe");
 	(*(sample+1)).phone=1234568;
 	strcpy((*(sample+1)).email,"john.doe@jomail.com");
-	(*(sample+1)).date=10198120007;
+	(*(sample+1)).date=time(0);
 //3
 	strcpy((*(sample+2)).name,"Jane Smith");
 	(*(sample+2)).phone=1234569;
 	strcpy((*(sample+2)).email,"jane.smith@jomail.com");
-	(*(sample+2)).date=220312134212;
+	(*(sample+2)).date=time(0);
 //4
 	strcpy((*(sample+3)).name,"Jane Doe");
 	(*(sample+3)).phone=1234570;
 	strcpy((*(sample+3)).email,"jane.doe@jomail.com");
-	(*(sample+3)).date=121212121212;
+	(*(sample+3)).date=time(0);
 
 //5
 	strcpy((*(sample+4)).name,"Eugine Crabs");
 	(*(sample+4)).phone=99124322;
 	strcpy((*(sample+4)).email,"orders@thecrustycrab.com");
-	(*(sample+4)).date=170799160222;
+	(*(sample+4)).date=time(0);
 }

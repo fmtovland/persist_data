@@ -16,16 +16,21 @@ int main()
 {
 	FILE *book;
 	struct contact phonebook[MAX];
+	int size;	//the number of contacts currently included
 	char input=0;
 
 	//load phonebook into ram (12kb of ram required)
 	book=fopen(filename,"rb");
 	if(book==NULL)	//if file does not exist, write 5 sample contacts
-	write_sample(phonebook);
+	{
+		write_sample(phonebook);
+		size=5;
+	}
 
 	else
 	{
 		fread(phonebook,MAX,sizeof(struct contact),book);
+		fread(&size,1,sizeof(int),book);
 		fclose(book);
 
 	}//end else
@@ -55,6 +60,20 @@ int main()
 
 			}//end case 0
 
+			case '1':
+			{
+				if(size<MAX)
+				{
+					addcon(phonebook+size);
+					size++;
+				}
+
+				else
+				printf("Phonebook full\n");
+
+				break;
+			}//end case 1
+
 			case '5':	//save phonebook
 			{
 				printf("saving...\n");
@@ -66,6 +85,7 @@ int main()
 				else
 				{
 					fwrite(phonebook,MAX,sizeof(struct contact),book);
+					fwrite(&size,1,sizeof(int),book);
 					fclose(book);
 					printf("saved sucessfully\n");
 
@@ -87,3 +107,17 @@ int main()
 
 }//end main
 
+void addcon(struct contact *newcontact) 	//add a contact
+{
+	printf("Enter name of new contact: ");
+	wordget((*newcontact).name,NAMLEN);
+
+	printf("Enter their phone number: ");
+	scanf("%uld",&(*newcontact).phone);
+	overflow();
+
+	printf("Enter their email address: ");
+	wordget((*newcontact).email,MAILLEN);
+
+	(*newcontact).date=time(0);	//see http://stackoverflow.com/questions/2242963/get-the-current-time-in-seconds
+}
