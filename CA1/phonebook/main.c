@@ -11,6 +11,7 @@ void addcon(struct contact*);		//add a contact
 void delcon(struct contact*);		//delete a contact
 void edcon(struct contact*);		//edit a contact
 void searchcon(struct contact*);	//search for a contact by name
+void display(struct contact*,int);	//display entire phonebook
 
 int main()
 {
@@ -43,6 +44,7 @@ int main()
 		printf("\n 3. Edit contact");
 		printf("\n 4. Find contact");
 		printf("\n 5. Record contacts");
+		printf("\n 6. Print entire phonebook");
 		printf("\n 0. Exit");
 
 		printf("\n");
@@ -95,6 +97,13 @@ int main()
 
 			}//end case
 
+			case '6':
+			{
+				display(phonebook,size);
+				break;
+
+			}//end case 6
+
 			default:
 			{
 				printf("Error, invalid input\n");
@@ -120,4 +129,19 @@ void addcon(struct contact *newcontact) 	//add a contact
 	wordget((*newcontact).email,MAILLEN);
 
 	(*newcontact).date=time(0);	//see http://stackoverflow.com/questions/2242963/get-the-current-time-in-seconds
-}
+
+}//end addcon
+
+void display(struct contact *phonebook,int size)
+{
+	int i;
+
+	for(i=0; i<size; i++)
+	{
+		printf("Contact %d\n",i);
+		printf(" %s\n %lu\n %s\n",(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
+		printf("\n");
+
+	}//end for
+
+}//end display
