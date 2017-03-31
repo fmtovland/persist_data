@@ -12,6 +12,7 @@ void delcon(struct contact*);		//delete a contact
 void edcon(struct contact*);		//edit a contact
 void searchcon(struct contact*);	//search for a contact by name
 void display(struct contact*,int);	//display entire phonebook
+void dateprint(time_t);			//display the date
 
 int main()
 {
@@ -135,13 +136,17 @@ void addcon(struct contact *newcontact) 	//add a contact
 void display(struct contact *phonebook,int size)
 {
 	int i;
+	struct tm* date;
 
 	for(i=0; i<size; i++)
 	{
 		printf("Contact %d\n",i);
 		printf(" %s\n %lu\n %s\n",(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
+		//dateprint((*(phonebook+i)).date);
 		printf("\n");
 
 	}//end for
 
 }//end display
+
+
