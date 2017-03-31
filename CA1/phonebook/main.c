@@ -113,7 +113,7 @@ void addcon(struct contact *newcontact) 	//add a contact
 	wordget((*newcontact).name,NAMLEN);
 
 	printf("Enter their phone number: ");
-	scanf("%uld",&(*newcontact).phone);
+	scanf("%lud",&(*newcontact).phone);
 	overflow();
 
 	printf("Enter their email address: ");
