@@ -81,6 +81,7 @@ int main()
 
 			case '3':
 			{
+				display(phonebook,size);
 				printf("Enter the number of a contact, to edit that contact\n");
 				scanf("%d",&num);
 				overflow();
@@ -156,13 +157,55 @@ void edcon(struct contact *con)
 
 	do
 	{
+		printf("\n");
 		display(con,1);
 		printf("Press 1 to change name\n");
 		printf("Press 2 to change phonenumber\n");
 		printf("Press 3 to change email address\n");
-		printf("Press 4 to finish editing\n");
+		printf("Press 0 to finish editing\n");
 		scanf("%c",&input);
 		overflow();
+
+		switch(input)
+		{
+			case '1':
+			{
+				printf("Enter new name: ");
+				wordget(con->name,NAMLEN);
+				break;
+
+			}//end case 1
+
+			case '2':
+			{
+				printf("Enter new phonenumber: ");
+				scanf("%lu",&con->phone);
+				overflow();
+				break;
+
+			}//end case 2
+
+			case '3':
+			{
+				printf("Enter new email: ");
+				wordget(con->email,MAILLEN);
+				break;
+
+			}//end case 3
+
+			case '0':
+			{
+				break;
+
+			}
+
+			default:
+			{
+				printf("What?\n");
+
+			}//end default
+
+		}//end switch
 	}
 	while(input != '0');
 
