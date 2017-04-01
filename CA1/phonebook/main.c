@@ -7,20 +7,21 @@
 const char filename[13]="phonebook.pb";
 
 //prototypes
-void addcon(struct contact*);		//add a contact
-void delcon(struct contact*);		//delete a contact
-void edcon(struct contact*);		//edit a contact
-void searchcon(struct contact*);	//search for a contact by name
-void display(struct contact*,int);	//display entire phonebook
-void dateprint(time_t);			//display the date
+void addcon(struct contact*);			//add a contact
+void delcon(struct contact*);			//delete a contact
+void edcon(struct contact*);			//edit a contact
+int searchcon(char*,struct contact*,int);	//search for a contact by name
+void display(struct contact*,int);		//display entire phonebook
+void dateprint(time_t);				//display the date
 
 int main()
 {
 	FILE *book;
 	struct contact phonebook[MAX];
-	int size;	//the number of contacts currently included
+	int size;		//the number of contacts currently included
 	char input=0;
-	int num;	//which number to edit
+	int num;		//which number to edit
+	char name[NAMLEN];	//name to search for
 
 	//load phonebook into ram (12kb of ram required)
 	book=fopen(filename,"rb");
@@ -64,7 +65,7 @@ int main()
 
 			}//end case 0
 
-			case '1':
+			case '1':	//new contact
 			{
 				if(size<MAX)
 				{
@@ -79,7 +80,7 @@ int main()
 				break;
 			}//end case 1
 
-			case '3':
+			case '3':	//edit contact
 			{
 				display(phonebook,size);
 				printf("Enter the number of a contact, to edit that contact\n");
@@ -94,6 +95,17 @@ int main()
 				break;
 
 			}//end case 3
+
+			case '4':	//find contact
+			{
+				printf("Enter name to search for: ");
+				wordget(name,NAMLEN);
+				num=searchcon(name,phonebook,size);
+				display(phonebook+num,1);
+
+				break;
+
+			}	//end case 4
 
 			case '5':	//save phonebook
 			{
@@ -210,6 +222,43 @@ void edcon(struct contact *con)
 	while(input != '0');
 
 }//end edcon
+
+int searchcon(char *name, struct contact *phonebook, int size)
+{
+	int conno=(size/2);	//the id of the contact searched for
+	int diff=(conno/2);	//the difference to move by
+	int i=0;		//tells which character of the string name is currently being compared
+
+	while(diff>1 && i!=NAMLEN)
+	{
+		i=0;
+
+		do
+		{
+			if( (phonebook+conno)->name[i] < *(name+i) )
+			{
+				conno=size+diff;
+				size=size/2;
+
+			}//end if
+
+			else if( (phonebook+conno)->name[i] > *(name+i) )
+			{
+				conno=size-diff;
+				size=size/2;
+
+			}//end if
+
+			i++;
+
+		}//end while
+		while(i<NAMLEN && (  (phonebook+conno)->name[i] == *(name+i) || *(name+i)=='\0' ));
+
+	}//end while
+
+	return conno;
+
+}//end searchcon
 
 void display(struct contact *phonebook,int size)
 {
