@@ -229,8 +229,9 @@ void searchcon(char *search_term,struct contact *phonebook, int size)
 
 	for(j=0; j<size; j++)
 	{
-		strcpy(phonebook+j,subject);		//a struct is like an array: it points to the address of the first element
-		*(subject+strlen(search_term))='\0';	//in this case, a string called name
+		strcpy(subject,(phonebook+j)->name);
+		*(subject+strlen(search_term)+1)='\0';	//in this case, a string called name
+		printf("%s %s\n",subject,search_term);
 
 		if( strcmp(subject,search_term)==0 )
 		result=j;
