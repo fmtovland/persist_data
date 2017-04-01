@@ -20,6 +20,7 @@ int main()
 	struct contact phonebook[MAX];
 	int size;	//the number of contacts currently included
 	char input=0;
+	int num;	//which number to edit
 
 	//load phonebook into ram (12kb of ram required)
 	book=fopen(filename,"rb");
@@ -68,6 +69,7 @@ int main()
 				if(size<MAX)
 				{
 					addcon(phonebook+size);
+					//sort(phonebook);
 					size++;
 				}
 
@@ -76,6 +78,21 @@ int main()
 
 				break;
 			}//end case 1
+
+			case '3':
+			{
+				printf("Enter the number of a contact, to edit that contact\n");
+				scanf("%d",&num);
+				overflow();
+
+				if(num<size)
+				edcon(phonebook+num);
+				else
+				printf("Error: contact not found\n");
+
+				break;
+
+			}//end case 3
 
 			case '5':	//save phonebook
 			{
@@ -132,6 +149,24 @@ void addcon(struct contact *newcontact) 	//add a contact
 	(*newcontact).date=time(0);	//see http://stackoverflow.com/questions/2242963/get-the-current-time-in-seconds
 
 }//end addcon
+
+void edcon(struct contact *con)
+{
+	char input;
+
+	do
+	{
+		display(con,1);
+		printf("Press 1 to change name\n");
+		printf("Press 2 to change phonenumber\n");
+		printf("Press 3 to change email address\n");
+		printf("Press 4 to finish editing\n");
+		scanf("%c",&input);
+		overflow();
+	}
+	while(input != '0');
+
+}//end edcon
 
 void display(struct contact *phonebook,int size)
 {
