@@ -223,15 +223,20 @@ void edcon(struct contact *con)
 void searchcon(char *search_term,struct contact *phonebook, int size)
 {
 	int j;
-	int result=MAX;	//final result, number of elements verified correct
+	int result=MAX;		//final result, number of elements verified correct
 	char subject[NAMLEN];	//term to compare will be placed here, then prematurly be null terminated
 
 
 	for(j=0; j<size; j++)
 	{
 		strcpy(subject,(phonebook+j)->name);
-		*(subject+strlen(search_term)+1)='\0';	//in this case, a string called name
-		printf("%s %s\n",subject,search_term);
+		*(subject+strlen(search_term))='\0';	//in this case, a string called name
+
+			//debuggin
+			int i;
+			printf("\n%s,%s",search_term,subject);
+			for(i=0; i<NAMLEN; i++)
+			printf("%d %d\n",search_term[i],subject[i]);
 
 		if( strcmp(subject,search_term)==0 )
 		result=j;
