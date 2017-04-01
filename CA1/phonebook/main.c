@@ -18,10 +18,10 @@ int main()
 {
 	FILE *book;
 	struct contact phonebook[MAX];
-	int size;	//the number of contacts currently included
+	int size;		//the number of contacts currently included
 	char input=0;
-	int num;	//which number to edit
-	char name[NAMLEN];
+	int num;		//which number to edit
+	char name[NAMLEN];	//name to search for
 
 	//load phonebook into ram (12kb of ram required)
 	book=fopen(filename,"rb");
@@ -65,7 +65,7 @@ int main()
 
 			}//end case 0
 
-			case '1':
+			case '1':	//new contact
 			{
 				if(size<MAX)
 				{
@@ -80,7 +80,7 @@ int main()
 				break;
 			}//end case 1
 
-			case '3':
+			case '3':	//edit contact
 			{
 				display(phonebook,size);
 				printf("Enter the number of a contact, to edit that contact\n");
