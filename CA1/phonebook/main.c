@@ -231,13 +231,6 @@ void searchcon(char *search_term,struct contact *phonebook, int size)
 	{
 		strcpy(subject,(phonebook+j)->name);
 		*(subject+strlen(search_term))='\0';	//in this case, a string called name
-
-			//debuggin
-			int i;
-			printf("\n%s,%s",search_term,subject);
-			for(i=0; i<NAMLEN; i++)
-			printf("%d %d\n",search_term[i],subject[i]);
-
 		if( strcmp(subject,search_term)==0 )
 		result=j;
 
