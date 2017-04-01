@@ -7,12 +7,12 @@
 const char filename[13]="phonebook.pb";
 
 //prototypes
-void addcon(struct contact*);		//add a contact
-void delcon(struct contact*);		//delete a contact
-void edcon(struct contact*);		//edit a contact
-void searchcon(struct contact*);	//search for a contact by name
-void display(struct contact*,int);	//display entire phonebook
-void dateprint(time_t);			//display the date
+void addcon(struct contact*);			//add a contact
+void delcon(struct contact*);			//delete a contact
+void edcon(struct contact*);			//edit a contact
+void searchcon(char*,struct contact*,int);	//search for a contact by name
+void display(struct contact*,int);		//display entire phonebook
+void dateprint(time_t);				//display the date
 
 int main()
 {
@@ -21,6 +21,7 @@ int main()
 	int size;	//the number of contacts currently included
 	char input=0;
 	int num;	//which number to edit
+	char name[NAMLEN];
 
 	//load phonebook into ram (12kb of ram required)
 	book=fopen(filename,"rb");
@@ -94,6 +95,14 @@ int main()
 				break;
 
 			}//end case 3
+
+			case '4':	//Find contact
+			{
+				printf("Enter name of contact to search for: ");
+				wordget(name,NAMLEN);
+				searchcon(name,phonebook,size);
+				break;
+			}
 
 			case '5':	//save phonebook
 			{
@@ -210,6 +219,34 @@ void edcon(struct contact *con)
 	while(input != '0');
 
 }//end edcon
+
+void searchcon(char *search_term,struct contact *phonebook, int size)
+{
+	int j;
+	int result=MAX;	//final result, number of elements verified correct
+	char subject[NAMLEN];	//term to compare will be placed here, then prematurly be null terminated
+
+
+	for(j=0; j<size; j++)
+	{
+		strcpy(phonebook+j,subject);		//a struct is like an array: it points to the address of the first element
+		*(subject+strlen(search_term))='\0';	//in this case, a string called name
+
+		if( strcmp(subject,search_term)==0 )
+		result=j;
+
+	}//end for
+
+	if(result!=MAX)
+	{
+		printf("Found ");
+		display(phonebook+result,1);
+	}//end if
+
+	else
+	printf("Contact not found\n");
+
+}//end searchcon
 
 void display(struct contact *phonebook,int size)
 {
