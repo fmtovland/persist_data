@@ -10,7 +10,7 @@ const char filename[13]="phonebook.pb";
 void addcon(struct contact*);			//add a contact
 void delcon(struct contact*);			//delete a contact
 void edcon(struct contact*);			//edit a contact
-int searchcon(char*,struct contact*,int);	//search for a contact by name
+void searchcon(char*,struct contact*,int);	//search for a contact by name
 void display(struct contact*,int);		//display entire phonebook
 void dateprint(time_t);				//display the date
 
@@ -96,16 +96,13 @@ int main()
 
 			}//end case 3
 
-			case '4':	//find contact
+			case '4':	//Find contact
 			{
-				printf("Enter name to search for: ");
+				printf("Enter name of contact to search for: ");
 				wordget(name,NAMLEN);
-				num=searchcon(name,phonebook,size);
-				display(phonebook+num,1);
-
+				searchcon(name,phonebook,size);
 				break;
-
-			}	//end case 4
+			}
 
 			case '5':	//save phonebook
 			{
@@ -223,40 +220,30 @@ void edcon(struct contact *con)
 
 }//end edcon
 
-int searchcon(char *name, struct contact *phonebook, int size)
+void searchcon(char *search_term,struct contact *phonebook, int size)
 {
-	int conno=(size/2);	//the id of the contact searched for
-	int diff=(conno/2);	//the difference to move by
-	int i=0;		//tells which character of the string name is currently being compared
+	int j;
+	int result=MAX;		//final result, number of elements verified correct
+	char subject[NAMLEN];	//term to compare will be placed here, then prematurly be null terminated
 
-	while(diff>1 && i!=NAMLEN)
+
+	for(j=0; j<size; j++)
 	{
-		i=0;
+		strcpy(subject,(phonebook+j)->name);
+		*(subject+strlen(search_term))='\0';	//in this case, a string called name
+		if( strcmp(subject,search_term)==0 )
+		result=j;
 
-		do
-		{
-			if( (phonebook+conno)->name[i] < *(name+i) )
-			{
-				conno=size+diff;
-				size=size/2;
+	}//end for
 
-			}//end if
+	if(result!=MAX)
+	{
+		printf("Found ");
+		display(phonebook+result,1);
+	}//end if
 
-			else if( (phonebook+conno)->name[i] > *(name+i) )
-			{
-				conno=size-diff;
-				size=size/2;
-
-			}//end if
-
-			i++;
-
-		}//end while
-		while(i<NAMLEN && (  (phonebook+conno)->name[i] == *(name+i) || *(name+i)=='\0' ));
-
-	}//end while
-
-	return conno;
+	else
+	printf("Contact not found\n");
 
 }//end searchcon
 
