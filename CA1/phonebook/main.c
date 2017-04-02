@@ -251,7 +251,6 @@ void display(struct contact *phonebook,int size)
 
 	for(i=0; i<size; i++)
 	{
-		printf("Contact %d\n",i);
 		printf(" %s\n %lu\n %s\n",(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
 		//dateprint((*(phonebook+i)).date);
 		printf("\n");
