@@ -8,7 +8,7 @@ const char filename[13]="phonebook.pb";
 
 //prototypes
 void addcon(struct contact*);			//add a contact
-void delcon(struct contact*);			//delete a contact
+void delcon(struct contact*,int,int*);		//delete a contact
 void edcon(struct contact*);			//edit a contact
 void searchcon(char*,struct contact*,int);	//search for a contact by name
 void display(struct contact*,int);		//display entire phonebook
@@ -20,7 +20,7 @@ int main()
 	struct contact phonebook[MAX];
 	int size;		//the number of contacts currently included
 	char input=0;
-	int num;		//which number to edit
+	int num;		//which number to edit/delete
 	char name[NAMLEN];	//name to search for
 
 	//load phonebook into ram (12kb of ram required)
@@ -80,6 +80,21 @@ int main()
 				break;
 			}//end case 1
 
+			case '2':	//delete a contact
+			{
+				display(phonebook,size);
+				printf("Enter a contact to delete: ");
+				scanf("%d",&num);
+				overflow();
+
+				if(num<size && num>-1)
+				delcon(phonebook,num,&size);
+				else
+				printf("Invalid input\n");
+
+				break;
+			}
+
 			case '3':	//edit contact
 			{
 				display(phonebook,size);
@@ -87,7 +102,7 @@ int main()
 				scanf("%d",&num);
 				overflow();
 
-				if(num<size)
+				if(num<size && num>-1)
 				edcon(phonebook+num);
 				else
 				printf("Error: contact not found\n");
@@ -159,6 +174,21 @@ void addcon(struct contact *newcontact) 	//add a contact
 	(*newcontact).date=time(0);	//see http://stackoverflow.com/questions/2242963/get-the-current-time-in-seconds
 
 }//end addcon
+
+void delcon(struct contact *phonebook, int id_to_delete, int *size)
+{
+	struct contact tmp;
+	//shrink size of phonebook, and make the variable point to where to put the deleted contact
+	*size= *size - 1;
+
+	//swap target with last contact in phonebook
+	tmp=*(phonebook+id_to_delete);
+	*(phonebook+id_to_delete)=*(phonebook + *size);
+	*(phonebook + *size)=tmp;
+
+	//contact is now at end of phonebook, and outside readable range
+
+}
 
 void edcon(struct contact *con)
 {
