@@ -281,6 +281,8 @@ void display(struct contact *phonebook,int size)
 
 	for(i=0; i<size; i++)
 	{
+		if(size!=1)
+		printf("%d\n",i);
 		date=(phonebook+i)->date;	//see https://www.tutorialspoint.com/c_standard_library/c_function_ctime.htm
 		printf(" %s %s\n %lu\n %s\n",ctime(&date),(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
 		printf("\n");
