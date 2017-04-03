@@ -277,12 +277,12 @@ void searchcon(char *search_term,struct contact *phonebook, int size)
 void display(struct contact *phonebook,int size)
 {
 	int i;
-	struct tm* date;
+	long unsigned int date;
 
 	for(i=0; i<size; i++)
 	{
-		printf(" %s\n %lu\n %s\n",(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
-		//dateprint((*(phonebook+i)).date);
+		date=(phonebook+i)->date;	//see https://www.tutorialspoint.com/c_standard_library/c_function_ctime.htm
+		printf(" %s %s\n %lu\n %s\n",ctime(&date),(phonebook+i)->name,(phonebook+i)->phone,(phonebook+i)->email);
 		printf("\n");
 
 	}//end for
