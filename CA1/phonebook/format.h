@@ -18,26 +18,26 @@ void write_sample(struct contact *sample)	//a sample contact with 5 contacts
 	strcpy((*(sample+0)).name,"John Smith");
 	(*(sample+0)).phone=1234567;
 	strcpy((*(sample+0)).email,"john.smith@jomail.com");
-	(*(sample+0)).date=time(0);
+	(*(sample+0)).date=915148815;
 //2
 	strcpy((*(sample+1)).name,"John Doe");
 	(*(sample+1)).phone=1234568;
 	strcpy((*(sample+1)).email,"john.doe@jomail.com");
-	(*(sample+1)).date=time(0);
+	(*(sample+1)).date=883656007;
 //3
 	strcpy((*(sample+2)).name,"Jane Smith");
 	(*(sample+2)).phone=1234569;
 	strcpy((*(sample+2)).email,"jane.smith@jomail.com");
-	(*(sample+2)).date=time(0);
+	(*(sample+2)).date=1332417607;
 //4
 	strcpy((*(sample+3)).name,"Jane Doe");
 	(*(sample+3)).phone=1234570;
 	strcpy((*(sample+3)).email,"jane.doe@jomail.com");
-	(*(sample+3)).date=time(0);
+	(*(sample+3)).date=1355314332;
 
 //5
 	strcpy((*(sample+4)).name,"Eugine Crabs");
 	(*(sample+4)).phone=99124322;
 	strcpy((*(sample+4)).email,"orders@thecrustycrab.com");
-	(*(sample+4)).date=time(0);
+	(*(sample+4)).date=932227342;
 }
