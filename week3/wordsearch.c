@@ -64,7 +64,7 @@ int main()
 		{
 			j=0;
 			word_number++;
-			while(line[i] != ' ' && j<WORDSIZE)
+			while(line[i] != ' ' && j<LINESIZE)
 			{
 				word[j]=line[i];
 				i++;
@@ -77,6 +77,7 @@ int main()
 			if(strcmp(word,user_input) == 0)
 			{
 				printf("Word found at line %d word %d \n",line_number,word_number);
+				printf("%s",line);
 				return 0;
 
 			}//end if
