@@ -90,6 +90,7 @@ int main()
 				//remove from queue
 				last=out;
 				out=out->next;
+				q_size--;
 
 				//print information
 				printf("name: %s\n",last->name);			//print name
@@ -123,5 +124,13 @@ int main()
 
 	}
 	while(input != '0');
+
+	//free memory from queue
+	while(q_size>0)
+	{
+		q_size--;
+		last=out;
+		out=out->next;
+	}
 
 }//end main
