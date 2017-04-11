@@ -14,3 +14,46 @@ struct queue
 
 };
 
+int main()
+{
+	struct queue *in,*out;
+	char input;
+
+	do
+	{
+		printf("Press 1 to add to queue.\n Press 2 to pop from queue.\n Press 0. to exit program.\n");
+		scanf("%c",&input);
+		if(overflow() != 0)
+		input='\0';
+
+		switch(input)
+		{
+			case '0':
+			{
+				printf("Have a nice day!\n");
+				break;
+			}
+
+			case '1':
+			{
+				//add to queue
+				break;
+			}
+
+			case '2':
+			{
+				//pop from queue
+				break;
+			}
+
+			default:
+			{
+				printf("Invalid input\n");
+			}
+
+		}//end switch
+
+	}
+	while(input != '0');
+
+}//end main
