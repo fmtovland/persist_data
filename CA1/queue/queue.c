@@ -4,19 +4,12 @@
 #define NAMLEN 16	//for a name of max length 15 letters
 #define TWEET 401	//number of characters in a tweet (plus null). should be enough for a short description
 
-struct time	//for the time of the phonecall
-{
-	short hours;
-	short mins;
-	short secs;
-};
-
 struct queue
 {
 	char name[NAMLEN];		//name of client
 	long unsigned int contact_no;	//number client can be reached on
 	char issue[TWEET];		//short description of issue.
-	struct time calllen;		//time of phone call in hours, minutes and seconds
+	short calllen[3];		//time of phone call in hours, minutes and seconds
 	struct queue *next;		//pointer to next person in queue
 
 };
@@ -78,7 +71,7 @@ int main()
 				//input time
 				for(i=0; i<3; i++)
 				{
-					scanf("%hd",&in->calllen.hours+i);
+					scanf("%hd",in->calllen+i);
 					scanf("%*c");
 				}
 
@@ -107,7 +100,7 @@ int main()
 				printf("Time of call: ");
 				for(i=0; i<3; i++)
 				{
-					printf("%hd",in->calllen.hours+i);
+					printf("%2hd",*in->calllen+i);
 
 					if(i%3 != 2)
 						printf(":");
