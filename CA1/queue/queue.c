@@ -23,7 +23,7 @@ struct queue
 
 int main()
 {
-	struct queue *in,*out;
+	struct queue *in,*out,*last;
 	char input;
 	int q_size=0;
 	int i;		//for loops
@@ -46,8 +46,13 @@ int main()
 			case '1':
 			{
 				//allocate element of queue
-				if(q_size == 5)
+
+				if(q_size == 5)		//prevent the queue being overfilled
+				{
 					printf("Queue is full\n");
+					break;
+				}
+
 				else if(q_size == 0)
 					in=out=malloc(sizeof(struct queue));
 				else
@@ -70,6 +75,7 @@ int main()
 				wordget(in->issue,TWEET);
 
 				printf("enter the time of the phonecall in form hh:mm:ss\n");
+				//input time
 				for(i=0; i<3; i++)
 				{
 					scanf("%hd",&in->calllen.hours+i);
@@ -82,6 +88,36 @@ int main()
 			case '2':
 			{
 				//pop from queue
+				if(q_size == 0)		//check you can pop from the queue
+				{
+					printf("Queue is empty\n");
+					break;
+				}//end if
+
+				//remove from queue
+				last=out;
+				out=out->next;
+
+				//print information
+				printf("name: %s\n",last->name);			//print name
+				printf("contact number: %lu\n",last->contact_no);	//print contact number
+				printf("issue: %s\n",last->issue);			//print issue
+
+				//print time of call
+				printf("Time of call: ");
+				for(i=0; i<3; i++)
+				{
+					printf("%hd",in->calllen.hours+i);
+
+					if(i%3 != 2)
+						printf(":");
+					else
+						printf("\n");
+				}
+
+				printf("\n");
+
+				free(last);
 				break;
 			}
 
