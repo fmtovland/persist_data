@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "lminput.h"
+#include "../lminput.h"
 #define NAMLEN 16	//for a name of max length 15 letters
 #define TWEET 401	//number of characters in a tweet (plus null). should be enough for a short description
 
