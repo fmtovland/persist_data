@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "format.h"
-#include "lminput.h"
+#include "../lminput.h"
 #define MAX 200	//maximum number of contacts that can be stored in the phonebook
 
 //name of phonebook
