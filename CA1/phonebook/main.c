@@ -14,7 +14,7 @@ void edcon(struct contact*);			//edit a contact
 void searchcon(char*,struct contact*,int);	//search for a contact by name
 void display(struct contact*,int);		//display entire phonebook
 void dateprint(time_t);				//display the date
-void alphabet_sort          //sort the struct
+void alphabet_sort(struct contact *,int);	//sort the struct
 
 int main()
 {
@@ -282,7 +282,7 @@ void display(struct contact *phonebook,int size)
 	long unsigned int date;
 
 	//call alphabet_sort to sort array
-	alphabet_sort;
+	alphabet_sort(phonebook,size);
 
 	for(i=0; i<size; i++)
 	{
