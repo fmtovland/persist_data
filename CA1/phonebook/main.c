@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "format.h"
-#include "../lminput.h"
+#include "lminput.h"
+#include "eoin.h"
 #define MAX 200	//maximum number of contacts that can be stored in the phonebook
 
 //name of phonebook
@@ -13,6 +14,7 @@ void edcon(struct contact*);			//edit a contact
 void searchcon(char*,struct contact*,int);	//search for a contact by name
 void display(struct contact*,int);		//display entire phonebook
 void dateprint(time_t);				//display the date
+void alphabet_sort          //sort the struct
 
 int main()
 {
@@ -278,6 +280,9 @@ void display(struct contact *phonebook,int size)
 {
 	int i;
 	long unsigned int date;
+
+	//call alphabet_sort to sort array
+	alphabet_sort;
 
 	for(i=0; i<size; i++)
 	{
